@@ -10,5 +10,8 @@ namespace CovidDados.Interface
     {
         public List<PessoaResponse> Listar();
         public PessoaResponse Obter(int id);
+        public BaseResponse Inserir(PessoaRequest request);
+        public BaseResponse Atualizar(PessoaRequest request);
+        public BaseResponse Deletar(int id);
     }
 }

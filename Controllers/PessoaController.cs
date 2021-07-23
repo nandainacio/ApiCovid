@@ -1,4 +1,5 @@
 ﻿using CovidDados.Interface;
+using CovidDados.Model;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,27 @@ namespace CovidDados.Controllers
         {
             var response = _pessoaService.Obter(id);
             return new ObjectResult(response) { StatusCode = 200 };
+        }
+
+        [HttpPost("inserir")]
+        public IActionResult Inserir([FromBody] PessoaRequest request)
+        {
+            var response = _pessoaService.Inserir(request);
+            return new ObjectResult(response) { StatusCode = response.StatusCode };
+        }
+
+        [HttpPut("atualizar")]
+        public IActionResult Atualizar([FromBody] PessoaRequest request)
+        {
+            var response = _pessoaService.Atualizar(request);
+            return new ObjectResult(response) { StatusCode = response.StatusCode };
+        }
+
+        [HttpDelete("deletar")]
+        public IActionResult Deletar([FromQuery] int id)
+        {
+            var response = _pessoaService.Deletar(id);
+            return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
     }
 }

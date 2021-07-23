@@ -28,9 +28,23 @@ namespace CovidDados
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //CORS(1/2)
+            //services.AddCors(options =>
+            //{ 
+            //    options.AddPolicy("CorsPolicy", builder => builder
+            //        .AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader());
+
+            //});
+
             services.AddControllers();
             services.AddTransient<IPessoaRepository, PessoaRepository>();
             services.AddTransient<IPessoaService, PessoaService>();
+            services.AddTransient<IFornecedorRepository, FornecedorRepository>();
+            services.AddTransient<IFornecedorService, FornecedorService>();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +55,15 @@ namespace CovidDados
                 app.UseDeveloperExceptionPage();
             }
 
+
+            app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //CORS(2/2)
+            //app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

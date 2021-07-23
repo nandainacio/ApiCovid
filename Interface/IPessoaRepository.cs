@@ -10,5 +10,10 @@ namespace CovidDados.Interface
     {
         public List<Pessoa> Listar();
         public Pessoa Obter(int Id);
+        public Pessoa ObterPorCpf(string CPF);
+        public void Inserir(Pessoa pessoa);
+        public void Atualizar(Pessoa pessoa);
+        public void Deletar(int Id);
+
     }
 }
